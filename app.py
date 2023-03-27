@@ -1,31 +1,19 @@
-import requests
-import json
+import openai
 
 # Set up API key and endpoint URL
-API_KEY = "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"
-ENDPOINT_URL = "https://api.openai.com/v1/engines/davinci-codex/completions"
+openai.api_key = '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'
+
 
 # Prompt user for input text
 input_text = input("Enter text to summarize: ")
 
-# Define request headers and parameters
-headers = {
-    "Content-Type": "application/json",
-    "Authorization": f"Bearer {API_KEY}"
-}
-data = {
-    "prompt": "Take the story, and generate an AI art piece that would best reflect the themes, colors, characters, and abstract ideas laid out in the story itself. Here is the story: '\n{input_text}'",
-    "max_tokens": 10,
-    "temperature": 0.01
-}
 
-# Send API request and get response
-response = requests.post(ENDPOINT_URL, headers=headers, json=data)
+output = openai.ChatCompletion.create(
+    model="gpt-3.5-turbo",
+    messages=[
+        {"role": "user","content": "You are an artist. Write one sentence that generates a prompt for an AI art piece (including art style, colors, themes, characters, and setting). Here is the story: '/n:" + input_text}
+    ]
+)
 
-# Parse response and extract generated text
-if response.status_code == 200:
-    response_json = response.json()
-    generated_text = response_json["choices"][0]["text"]
-    print(generated_text)
-else:
-    print("Error: API request failed")
+print(output.choices[0].message)
+
