@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+  <head>
+    <title>OpenAI Web App</title>
+  </head>
+  <body>
+    <h1>OpenAI Web App</h1>
+    <form method="POST">
+      <textarea name="input_text"></textarea>
+      <button type="submit">Generate Output</button>
+    </form>
+    {% if output_message %}
+      <h2>Output:</h2>
+      <p>{{ output_message }}</p>
+    {% endif %}
+  </body>
+</html>
