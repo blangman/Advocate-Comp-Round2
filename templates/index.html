@@ -1,24 +1,29 @@
 <!doctype html>
 <html>
-  <head>
-    <title>ADVOCATE Web App</title>
-    <link rel="stylesheet" href="index.css">
-  </head>
-  <body>
-    <h1>Advo Web App</h1>
-    <form method="POST">
-      <textarea name="input_text"></textarea>
+
+<head>
+  <title>ADVOCATE Web App</title>
+  <link rel="stylesheet" href="static/index.css">
+</head>
+
+<body>
+  <h1>Advo Web App</h1>
+  <form method="POST">
+    <textarea name="input_text"></textarea>
+    <center>
       <button type="submit">Generate Output</button>
-    </form>
-    {% if output_message %}
-      <h2>Output:</h2>
-      <p>{{ output_message }}</p>
-    {% endif %}
+    </center>
+  </form>
+  {% if output_message %}
+  <h2>Output:</h2>
+  <p>{{ output_message }}</p>
+  {% endif %}
 
-    {% if image_url %}
-      <h2>Output:</h2>
-      <p><img src="{{ image_url }}"></p>
-    {% endif %}
+  {% if image_url %}
+  <h2>Output:</h2>
+  <p><img src="{{ image_url }}"></p>
+  {% endif %}
 
-  </body>
+</body>
+
 </html>
