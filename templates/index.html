@@ -1,10 +1,11 @@
 <!doctype html>
 <html>
   <head>
-    <title>OpenAI Web App</title>
+    <title>ADVOCATE Web App</title>
+    <link rel="stylesheet" href="index.css">
   </head>
   <body>
-    <h1>OpenAI Web App</h1>
+    <h1>Advo Web App</h1>
     <form method="POST">
       <textarea name="input_text"></textarea>
       <button type="submit">Generate Output</button>
@@ -13,5 +14,11 @@
       <h2>Output:</h2>
       <p>{{ output_message }}</p>
     {% endif %}
+
+    {% if image_url %}
+      <h2>Output:</h2>
+      <p><img src="{{ image_url }}"></p>
+    {% endif %}
+
   </body>
 </html>
