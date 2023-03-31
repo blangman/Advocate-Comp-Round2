@@ -4,7 +4,7 @@ import openai
 app = Flask(__name__)
 
 # Set up API key and endpoint URL
-openai.api_key = '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'
+openai.api_key = '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'
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -19,7 +19,7 @@ def home():
                 model="gpt-3.5-turbo",
                 messages=[
                     {"role": "user",
-                    "content": "Write a sentence that generates a prompt for an AI art piece based on a story I will share (be sure to mention art style, colors, themes, characters, and setting). Be concise. Here is the story: '/n:" + input_text}
+                     "content": "Write a sentence that generates a prompt for an AI art piece based on a story I will share (be sure to mention art style, colors, themes, characters, and setting). Be concise. Here is the story: '/n:" + input_text}
                 ]
             )
 
@@ -35,18 +35,19 @@ def home():
             image_url = response['data'][0]['url']
             return render_template('index.html', output_message=output_message, image_url=image_url)
 
-        elif len(input_text) < 30000: 
+        elif len(input_text) > 15000:
+
+            if len(input_text) > 30000:
+                input_text = input_text[0:30000]
+
             input1 = input_text[:len(input_text)//2]
             input2 = input_text[len(input_text)//2:]
-
-            print(input1)
-            print(input2)
 
             output1 = openai.ChatCompletion.create(
                 model="gpt-3.5-turbo",
                 messages=[
                     {"role": "user",
-                    "content": "Write a sentence that generates a prompt for an AI art piece based on a story I will share (be sure to mention art style, colors, themes, characters, and setting). Be concise. Here is the story: '/n:" + input1}
+                     "content": "Write a sentence that generates a prompt for an AI art piece based on a story I will share (be sure to mention art style, colors, themes, characters, and setting). Be concise. Here is the story: '/n:" + input1}
                 ]
             )
 
@@ -54,7 +55,7 @@ def home():
                 model="gpt-3.5-turbo",
                 messages=[
                     {"role": "user",
-                    "content": "Write a sentence that generates a prompt for an AI art piece based on a story I will share (be sure to mention art style, colors, themes, characters, and setting). Be concise. Here is the story: '/n:" + input2}
+                     "content": "Write a sentence that generates a prompt for an AI art piece based on a story I will share (be sure to mention art style, colors, themes, characters, and setting). Be concise. Here is the story: '/n:" + input2}
                 ]
             )
 
@@ -76,9 +77,11 @@ def home():
             image_url1 = response1['data'][0]['url']
             image_url2 = response2['data'][0]['url']
             return render_template('index.html', output_message1=output_message1, output_message2=output_message2, image_url1=image_url1, image_url2=image_url2)
-    else:
-        print("")
-        return render_template('index.html')
+        else:
+            print("Input must be under 30,000 characters. Input is currently " + str(len(input_text)) + " characters")
+            return render_template('index.html')
+ 
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
