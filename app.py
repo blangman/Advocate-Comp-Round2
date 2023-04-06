@@ -47,7 +47,7 @@ def home():
                 model="gpt-3.5-turbo",
                 messages=[
                     {"role": "user",
-                     "content": "Write a sentence that generates a prompt for an AI art piece based on the first half of a story I will share (be sure to mention art style, colors, themes, characters, and setting). Be concise. Here is the story: '/n:" + input1}
+                     "content": "Summarize this story:" + input1}
                 ]
             )
 
@@ -55,7 +55,7 @@ def home():
                 model="gpt-3.5-turbo",
                 messages=[
                     {"role": "user",
-                     "content": "Write a sentence that generates a prompt for an AI art piece based on the second half of a story I will share (be sure to mention art style, colors, themes, characters, and setting). Be concise. Here is the story: '/n:" + input2}
+                     "content": "Summarize this story:" + input2}
                 ]
             )
 
@@ -66,7 +66,7 @@ def home():
                 model="gpt-3.5-turbo",
                 messages=[
                     {"role": "user",
-                     "content": "Merge these two prompts for an AI art piece into one prompt that pulls from elements of both. Here is the first prompt:" + output_message1 + "Here is the second prompt:" + output_message2 + "keep it concise."}
+                     "content": "Merge these summaries into one prompt for an AI art piece that pulls from elements of both (be sure to mention art style, colors, themes, characters, and setting). Be concise.. Here is the first summary:" + output_message1 + "Here is the second summary:" + output_message2 + "keep it concise."}
                 ]
             )
 
